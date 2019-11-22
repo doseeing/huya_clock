@@ -1,4 +1,17 @@
-
+$weuiBtnPrimaryBg:#07C160;
+$weuiBtnPrimaryFontColor:#FFFFFF;
+$weuiBtnPrimaryActiveFontColor:#FFFFFF;
+$weuiBtnPrimaryActiveBg:#06AD56;
+.weui-btn_primary {
+  background-color: $weuiBtnPrimaryBg;
+  &:not(.weui-btn_disabled):visited {
+      color: $weuiBtnPrimaryFontColor;
+  }
+  &:not(.weui-btn_disabled):active {
+      color: $weuiBtnPrimaryActiveFontColor;
+      background-color: $weuiBtnPrimaryActiveBg;
+  }
+}
 
 @font-face {
   font-family: 'Orbitron';
@@ -44,9 +57,8 @@ body {
   overflow: hidden;
   margin-bottom: 20px;
 }
-.weui-btn_primary {
-  background-color: #07C160;
-}
+
+
 .footer {
   position: fixed;
   left: 0;
