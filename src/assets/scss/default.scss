@@ -1,0 +1,40 @@
+$glow:0px 2px 25px rgba(144, 244, 253, .6);
+$paleturquoise:#afeeee;
+$backgroundDark:transparent;
+$grey:#444444;
+.clock {
+    // padding: 30px;
+    #time {
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.5em;
+      text-shadow: $glow;
+    }
+    #days, #fullDate {
+      width: 25%;
+      margin: 0 auto;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    .days {
+      flex: 1;
+      color: $grey;
+      text-align: center;
+    }
+    .split {
+      margin: 0 0.5rem;
+    }
+    .active {
+      color: paleturquoise;
+      text-shadow: $glow;
+    }
+    #fullDate {
+      margin-top:.25em;
+      text-shadow: $glow;
+    }
+    #sec{
+      display:inline-block;
+    }
+  }
