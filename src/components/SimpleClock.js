@@ -1,5 +1,7 @@
+// source: https://codepen.io/bsmith/pen/drElg
+
 import React from "react";
-import "../assets/scss/simple.scss";
+import "../assets/scss/simple_clock.scss";
 
 export default class SimpleClock extends React.Component {
   constructor(props) {
