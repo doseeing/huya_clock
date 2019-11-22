@@ -13,15 +13,37 @@ export default class Main extends React.Component {
     this.state = {
       theme: "default",
       mode: "default",
-      date: new Date()
+      date: new Date(),
+      isOn: "false",
+      startTime: null
     };
   }
 
   tick() {
+    const now = new Date();
     this.setState({
       ...this.state,
-      date: new Date()
+      date: now
     });
+    if (this.state.isOn && now.getSeconds() == 0) {
+      this.syncOnair();
+    }
+  }
+  syncOnair() {
+    // update on air status
+    window.hyExt.context
+      .getLiveInfo()
+      .then(liveInfo => {
+        console.log(liveInfo);
+        this.setState({
+          ...this.state,
+          isOn: liveInfo.isOn,
+          startTime: liveInfo.startTime
+        });
+      })
+      .catch(err => {
+        console.log("get liveInfo failed", err);
+      });
   }
 
   componentDidMount() {
@@ -53,6 +75,9 @@ export default class Main extends React.Component {
     const modeArray = ["default", "onair"];
     const index = modeArray.indexOf(this.state.mode);
     const newIndex = (index + 1) % modeArray.length;
+    if (newIndex == 1) {
+      this.syncOnair();
+    }
     this.setState({
       ...this.state,
       mode: modeArray[newIndex]
@@ -86,12 +111,36 @@ export default class Main extends React.Component {
       });
   }
   render() {
-    const { theme } = this.state;
-    const hour = this.state.date.getHours();
-    const minute = this.state.date.getMinutes();
-    const second = this.state.date.getSeconds();
+    const { theme, mode } = this.state;
+
+    let hour = this.state.date.getHours();
+    let minute = this.state.date.getMinutes();
+    let second = this.state.date.getSeconds();
+    if (this.state.mode == "onair") {
+      if (this.state.isOn === "true") {
+        const gap =
+          Math.floor(this.state.date.getTime() / 1000) - this.state.startTime;
+        hour = Math.floor(gap / 3600);
+        minute = Math.floor((gap - hour * 3600) / 60);
+        second = gap - hour * 3600 - minute * 60;
+      } else {
+        hour = 0;
+        minute = 0;
+        second = 0;
+      }
+    }
+
     return (
       <div>
+        <div className="mode">
+          {mode == "default" && <span>当前时间</span>}
+          {mode == "onair" && this.state.isOn === "false" && (
+            <span>未开播</span>
+          )}
+          {mode == "onair" && this.state.isOn === "true" && (
+            <span>开播时间</span>
+          )}
+        </div>
         {theme == "default" && (
           <DefaultClock
             myid="clock1"
