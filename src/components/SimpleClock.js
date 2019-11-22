@@ -27,7 +27,7 @@ export default class SimpleClock extends React.Component {
     const s2 = "n" + (dt.getSeconds() % 10);
     return (
       <div id={this.props.myid} className="clock">
-        <div id="clock" className="light">
+        <div id="clock" className={this.props.theme}>
           <div className="display">
             <div className="weekdays"></div>
             <div className="ampm"></div>

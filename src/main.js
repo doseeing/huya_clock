@@ -28,7 +28,7 @@ export default class Main extends React.Component {
   }
   componentWillUnmount() {}
   changeTheme() {
-    const themeArray = ["default", "simple"];
+    const themeArray = ["default", "digitalLight", "digitalDark"];
     const index = themeArray.indexOf(this.state.theme);
     const newIndex = (index + 1) % themeArray.length;
     this.setState({
@@ -66,8 +66,9 @@ export default class Main extends React.Component {
     const { theme } = this.state;
     return (
       <div>
-        {theme == "simple" && <DefaultClock myid="clock1" />}
-        {theme == "default" && <SimpleClock myid="clock1" />}
+        {theme == "default" && <DefaultClock myid="clock1" />}
+        {theme == "digitalLight" && <SimpleClock myid="clock1" theme="light"/>}
+        {theme == "digitalDark" && <SimpleClock myid="clock1" theme="dark"/>}
         <a
           href="#"
           onClick={this.changeTheme}
