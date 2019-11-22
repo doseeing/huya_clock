@@ -12,10 +12,20 @@ export default class Main extends React.Component {
     this.changeMode = this.changeMode.bind(this);
     this.state = {
       theme: "default",
-      mode: "default"
+      mode: "default",
+      date: new Date()
     };
   }
+
+  tick() {
+    this.setState({
+      ...this.state,
+      date: new Date()
+    });
+  }
+
   componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
     console.log("log start", window.hyExt);
     window.hyExt.onLoad(() => {
       console.log("虎牙小程序SDK onLoad触发");
@@ -28,7 +38,9 @@ export default class Main extends React.Component {
       });
     });
   }
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
   changeTheme() {
     const themeArray = ["default", "digitalLight", "digitalDark"];
     const index = themeArray.indexOf(this.state.theme);
@@ -75,11 +87,37 @@ export default class Main extends React.Component {
   }
   render() {
     const { theme } = this.state;
+    const hour = this.state.date.getHours();
+    const minute = this.state.date.getMinutes();
+    const second = this.state.date.getSeconds();
     return (
       <div>
-        {theme == "default" && <DefaultClock myid="clock1" />}
-        {theme == "digitalLight" && <SimpleClock myid="clock1" theme="light"/>}
-        {theme == "digitalDark" && <SimpleClock myid="clock1" theme="dark"/>}
+        {theme == "default" && (
+          <DefaultClock
+            myid="clock1"
+            hour={hour}
+            minute={minute}
+            second={second}
+          />
+        )}
+        {theme == "digitalLight" && (
+          <SimpleClock
+            myid="clock1"
+            theme="light"
+            hour={hour}
+            minute={minute}
+            second={second}
+          />
+        )}
+        {theme == "digitalDark" && (
+          <SimpleClock
+            myid="clock1"
+            theme="dark"
+            hour={hour}
+            minute={minute}
+            second={second}
+          />
+        )}
         <a
           href="#"
           onClick={this.changeTheme}
@@ -92,8 +130,8 @@ export default class Main extends React.Component {
           onClick={this.changeMode}
           className="weui-btn weui-btn_primary"
         >
-          {this.state.mode == 'default' && <span>显示开播时间</span>}
-          {this.state.mode == 'onair' && <span>显示当前时间</span>}
+          {this.state.mode == "default" && <span>显示开播时间</span>}
+          {this.state.mode == "onair" && <span>显示当前时间</span>}
         </a>
         <a
           href="#"

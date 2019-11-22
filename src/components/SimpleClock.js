@@ -4,29 +4,13 @@ import React from "react";
 import "../assets/scss/simple_clock.scss";
 
 export default class SimpleClock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
   render() {
-    const dt = this.state.date;
-    const h1 = "n" + Math.floor(dt.getHours() / 10);
-    const h2 = "n" + (dt.getHours() % 10);
-    const m1 = "n" + Math.floor(dt.getMinutes() / 10);
-    const m2 = "n" + (dt.getMinutes() % 10);
-    const s1 = "n" + Math.floor(dt.getSeconds() / 10);
-    const s2 = "n" + (dt.getSeconds() % 10);
+    const h1 = "n" + Math.floor(this.props.hour / 10);
+    const h2 = "n" + (this.props.hour % 10);
+    const m1 = "n" + Math.floor(this.props.minute / 10);
+    const m2 = "n" + (this.props.minute % 10);
+    const s1 = "n" + Math.floor(this.props.second/ 10);
+    const s2 = "n" + (this.props.second % 10);
     return (
       <div id={this.props.myid} className="clock">
         <div id="clock" className={this.props.theme}>

@@ -2,30 +2,15 @@ import React from "react";
 import "../assets/scss/default_clock.scss";
 
 export default class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
   render() {
     return (
       <div id={this.props.myid} className="clock">
         <div id="time">
-          <span id="hours">{this.state.date.getHours().toString().padStart(2, "0")}</span>
+          <span id="hours">{this.props.hour.toString().padStart(2, "0")}</span>
           <span className="split">:</span>
-          <span id="min">{this.state.date.getMinutes().toString().padStart(2, "0")}</span>
+          <span id="min">{this.props.minute.toString().padStart(2, "0")}</span>
           <span className="split">:</span>
-          <span id="sec">{this.state.date.getSeconds().toString().padStart(2, "0")}</span>
+          <span id="sec">{this.props.second.toString().padStart(2, "0")}</span>
         </div>
         {/* <div id="fullDate">
           <span id="year">{this.state.date.getFullYear()}</span>年
