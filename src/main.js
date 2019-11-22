@@ -9,8 +9,10 @@ export default class Main extends React.Component {
     this.addZone = this.addZone.bind(this);
     this.removeZone = this.removeZone.bind(this);
     this.changeTheme = this.changeTheme.bind(this);
+    this.changeMode = this.changeMode.bind(this);
     this.state = {
-      theme: "default"
+      theme: "default",
+      mode: "default"
     };
   }
   componentDidMount() {
@@ -33,6 +35,15 @@ export default class Main extends React.Component {
     const newIndex = (index + 1) % themeArray.length;
     this.setState({
       theme: themeArray[newIndex]
+    });
+  }
+  changeMode() {
+    const modeArray = ["default", "onair"];
+    const index = modeArray.indexOf(this.state.mode);
+    const newIndex = (index + 1) % modeArray.length;
+    this.setState({
+      ...this.state,
+      mode: modeArray[newIndex]
     });
   }
   addZone(e) {
@@ -75,6 +86,14 @@ export default class Main extends React.Component {
           className="weui-btn weui-btn_primary"
         >
           换个主题
+        </a>
+        <a
+          href="#"
+          onClick={this.changeMode}
+          className="weui-btn weui-btn_primary"
+        >
+          {this.state.mode == 'default' && <span>显示开播时间</span>}
+          {this.state.mode == 'onair' && <span>显示当前时间</span>}
         </a>
         <a
           href="#"
