@@ -64,7 +64,7 @@ export default class Main extends React.Component {
     clearInterval(this.timerID);
   }
   changeTheme() {
-    const themeArray = ["default", "digitalLight", "digitalDark"];
+    const themeArray = ["default", "digitalLight", "digitalDark", "digitalRed"];
     const index = themeArray.indexOf(this.state.theme);
     const newIndex = (index + 1) % themeArray.length;
     this.setState({
@@ -153,6 +153,15 @@ export default class Main extends React.Component {
           <SimpleClock
             myid="clock1"
             theme="dark"
+            hour={hour}
+            minute={minute}
+            second={second}
+          />
+        )}
+        {theme == "digitalRed" && (
+          <SimpleClock
+            myid="clock1"
+            theme="red"
             hour={hour}
             minute={minute}
             second={second}
