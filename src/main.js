@@ -132,15 +132,6 @@ export default class Main extends React.Component {
 
     return (
       <div>
-        <div className="mode">
-          {mode == "default" && <span>当前时间</span>}
-          {mode == "onair" && this.state.isOn === "false" && (
-            <span>未开播</span>
-          )}
-          {mode == "onair" && this.state.isOn === "true" && (
-            <span>开播时间</span>
-          )}
-        </div>
         {theme == "default" && (
           <DefaultClock
             myid="clock1"
@@ -167,6 +158,15 @@ export default class Main extends React.Component {
             second={second}
           />
         )}
+        <div className="mode">
+          {mode == "default" && <span>显示模式 : 当前时间</span>}
+          {mode == "onair" && this.state.isOn === "false" && (
+            <span>显示模式 : 开播时间 状态：未开播</span>
+          )}
+          {mode == "onair" && this.state.isOn === "true" && (
+            <span>显示模式 : 开播时间 状态：正在直播</span>
+          )}
+        </div>
         <a
           href="#"
           onClick={this.changeTheme}
