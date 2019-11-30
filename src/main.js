@@ -1,7 +1,9 @@
 import React from "react";
 import DefaultClock from "./components/DefaultClock";
 import SimpleClock from "./components/SimpleClock";
+import AppleClock from "./components/AppleClock";
 import Footer from "./components/Footer";
+
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -64,7 +66,7 @@ export default class Main extends React.Component {
     clearInterval(this.timerID);
   }
   changeTheme() {
-    const themeArray = ["default", "digitalLight", "digitalDark", "digitalRed"];
+    const themeArray = ["default", "digitalLight", "digitalDark", "digitalRed", "apple"];
     const index = themeArray.indexOf(this.state.theme);
     const newIndex = (index + 1) % themeArray.length;
     this.setState({
@@ -86,13 +88,13 @@ export default class Main extends React.Component {
   addZone(e) {
     e.preventDefault();
     window.hyExt.stream
-      .addZone(document.getElementById("clock1"), {
-        screenColor: "#222"
-      })
-      // .addWhiteBoard({
-      //   elem: document.getElementById("clock1"),
-      //   alpha: 100
+      // .addZone(document.getElementById("clock1"), {
+      //   screenColor: "#222"
       // })
+      .addWhiteBoard({
+        elem: document.getElementById("clock1"),
+        alpha: 100
+      })
       .then(() => {
         console.log("创建白板成功");
       })
@@ -162,6 +164,14 @@ export default class Main extends React.Component {
           <SimpleClock
             myid="clock1"
             theme="red"
+            hour={hour}
+            minute={minute}
+            second={second}
+          />
+        )}
+        {theme == "apple" && (
+          <AppleClock
+            myid="clock1"
             hour={hour}
             minute={minute}
             second={second}

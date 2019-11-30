@@ -2,6 +2,49 @@ $weuiBtnPrimaryBg:#07C160;
 $weuiBtnPrimaryFontColor:#FFFFFF;
 $weuiBtnPrimaryActiveFontColor:#FFFFFF;
 $weuiBtnPrimaryActiveBg:#06AD56;
+
+
+/*-------------------------
+	Simple reset
+--------------------------*/
+
+
+*{
+	margin:0;
+	padding:0;
+}
+
+
+/*-------------------------
+	General Styles
+--------------------------*/
+
+
+html{
+	// background: #dbe4e6;
+	overflow:hidden;
+}
+
+body{
+	font:15px/1.3 Arial, sans-serif;
+	color: #4f4f4f;
+	z-index:1;
+}
+
+a, a:visited {
+	outline:none;
+	// color:#389dc1;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+section, footer, header, aside{
+	display: block;
+}
+
+
 .weui-btn_primary {
   background-color: $weuiBtnPrimaryBg;
   &:not(.weui-btn_disabled):visited {
@@ -25,7 +68,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background: #222;
+  // background: #222;
 }
 
 body {
@@ -33,8 +76,8 @@ body {
   padding: 0;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
-  background: #222222;
-  color: #afeeee;
+  // background: #222222;
+  color: #222222;
 
 }
 
@@ -75,6 +118,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #afeeee;
 }
 .mode {
   text-align: center;
